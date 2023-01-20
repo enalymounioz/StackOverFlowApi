@@ -50,6 +50,23 @@ data class Question(
     }
 }
 
+data class Answer(
+    @SerializedName("answer_id")
+    val answerId: Int?,
+
+    @SerializedName("is_accepted")
+    val isAccepted: Boolean?,
+
+    val score: String?,
+
+    @SerializedName("creation_date")
+    val date: Long?
+){
+    override fun toString() =
+        "$answerId - $score - ${getDate(date)} - ${if (isAccepted==true) "ACCEPTED" else "NOT ACCEPTED"}"
+
+}
+
 fun convertTitle(title: String?) =
   //  if (Build.VERSION.SDK_INT >= 24)
         Html.fromHtml(title, Html.FROM_HTML_MODE_LEGACY).toString()

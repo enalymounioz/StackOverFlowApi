@@ -9,6 +9,9 @@ import android.os.Bundle
 import android.telecom.Call
 import com.enalymounioz.stackoverflowqueryapp.R
 import com.enalymounioz.stackoverflowqueryapp.model.Question
+import com.enalymounioz.stackoverflowqueryapp.model.convertTitle
+import com.enalymounioz.stackoverflowqueryapp.model.getDate
+import kotlinx.android.synthetic.main.activity_detail.*
 
 class DetailActivity : AppCompatActivity() {
 
@@ -30,5 +33,12 @@ class DetailActivity : AppCompatActivity() {
         if (question == null) {
             finish()
         }
+
+        populateUI()
+    }
+    private fun populateUI() {
+        question_score.text = question!!.score
+        question_date.text = getDate(question!!.date)
+        question_title.text = convertTitle(question!!.title)
     }
 }
