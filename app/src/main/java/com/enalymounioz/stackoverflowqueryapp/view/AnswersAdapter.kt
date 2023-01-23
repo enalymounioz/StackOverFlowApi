@@ -33,7 +33,4 @@ class AnswersAdapter(val answers: ArrayList<Answer>): RecyclerView.Adapter<Answe
 
         }
     }
-
-
-
 }

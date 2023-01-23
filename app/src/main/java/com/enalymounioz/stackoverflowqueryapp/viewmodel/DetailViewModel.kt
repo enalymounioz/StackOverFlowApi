@@ -9,7 +9,8 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class DetailViewModel: ViewModel() {
+class DetailViewModel : ViewModel() {
+
     val answersResponse = MutableLiveData<List<Answer>>()
     val loading = MutableLiveData<Boolean>()
     val error = MutableLiveData<String?>()
@@ -25,9 +26,9 @@ class DetailViewModel: ViewModel() {
         }
     }
 
-    private fun getAnswers(){
+    private fun getAnswers() {
         StackOverflowService.api.getAnswers(questionId, page)
-            .enqueue(object : Callback<ResponseWrapper<Answer>>{
+            .enqueue(object : Callback<ResponseWrapper<Answer>> {
                 override fun onResponse(
                     call: Call<ResponseWrapper<Answer>>,
                     response: Response<ResponseWrapper<Answer>>
@@ -38,19 +39,16 @@ class DetailViewModel: ViewModel() {
                         loading.value = false
                         error.value = null
                     }
-
-
                 }
 
                 override fun onFailure(call: Call<ResponseWrapper<Answer>>, t: Throwable) {
-
+                    onError(t.localizedMessage)
                 }
-
             })
     }
-    private fun onError(message: String){
+
+    private fun onError(message: String) {
         error.value = message
         loading.value = false
     }
-
 }
